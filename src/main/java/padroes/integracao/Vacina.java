@@ -47,6 +47,7 @@ public abstract class Vacina implements IVacina {
             ", paciente='" + paciente.getNome() + '\'' +
             ", dose=" + doseAtual + "/" + esquema.getTotalDoses() +
             ", posto='" + posto.getNomePosto() + '\'' +
+            ", profissional='" + posto.getProfissionalResponsavel() + '\'' +
             ", proximaDose=" + proxima +
             '}';
     }
