@@ -26,6 +26,19 @@ class VacinaHPVTest {
     }
 
     @Test
+    void deveAplicarSegundaDose() {
+        Paciente paciente = new Paciente("Paciente 1", 9);
+        vacina.aplicar(paciente, LocalDate.of(2026, 11, 1));
+        assertEquals("Vacinacao Adolescente{vacina='HPV', paciente='Paciente 1', dose=2/2, posto='Posto Vacina 1', profissional='Enfermeiro 1', proximaDose=esquema completo}", vacina.aplicar(paciente, LocalDate.of(2027, 4, 30)));
+    }
+
+    @Test
+    void deveDescontarUmaDoseDoEstoque() {
+        vacina.aplicar(new Paciente("Paciente 1", 9), LocalDate.of(2026, 11, 1));
+        assertEquals(4, PostoSaude.getInstance().getEstoqueHPV());
+    }
+
+    @Test
     void naoDeveAplicarAbaixoDaIdadeMinima() {
         Paciente paciente = new Paciente("Paciente 2", 8);
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> vacina.aplicar(paciente, LocalDate.of(2026, 11, 1)));

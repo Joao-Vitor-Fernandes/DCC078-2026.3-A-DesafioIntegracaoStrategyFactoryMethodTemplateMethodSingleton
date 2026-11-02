@@ -45,4 +45,11 @@ class VacinaGripeTest {
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> vacina.aplicar(paciente, LocalDate.of(2026, 11, 1)));
         assertEquals("Vacina sem estoque", e.getMessage());
     }
+
+    @Test
+    void naoDeveAplicarAbaixoDaIdadeMinima() {
+        Paciente recemNascido = new Paciente("Paciente 2", 0);
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> vacina.aplicar(recemNascido, LocalDate.of(2026, 11, 1)));
+        assertEquals("Idade inferior à mínima", e.getMessage());
+    }
 }
